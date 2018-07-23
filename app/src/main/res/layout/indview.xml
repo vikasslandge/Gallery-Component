@@ -10,6 +10,13 @@
         android:layout_height="150dp"
         android:id="@+id/vview"/>
 
+    <CheckBox
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb1"
+        android:text="Video Name"
+        />
+
 
 
 </LinearLayout>

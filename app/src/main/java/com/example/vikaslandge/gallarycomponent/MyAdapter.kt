@@ -15,23 +15,11 @@ class MyAdapter : BaseAdapter{
 
         var files :Array<File>? = null
         var activity : MainActivity? = null
-        constructor(activity: MainActivity){
-
+        constructor(files:Array<File>?,activity: MainActivity){
 
                 this.activity = activity
+                this.files = files
 
-                var path = "/storage/sdcard0/WhatsApp/Media/WhatsApp Video/"
-                var file = File(path)
-                if (!file.exists()){
-                     path = "/storage/emulated/0/WhatsApp/Media/WhatsApp Video"
-                        file = File(path)
-                }
-                //if (file.exists()){
-                files = file.listFiles()
-
-                //}else{
-                        //Toast.makeText(this,"Path does`nt exists",Toast.LENGTH_LONG).show()
-                //}
 
         }
 
@@ -43,6 +31,15 @@ class MyAdapter : BaseAdapter{
                 var v = inflater.inflate(R.layout.indview,null)
 
                 v.vview.setVideoURI(Uri.fromFile(files!![position]))
+                v.cb1.text = files!![position].name
+
+                v.cb1.setOnCheckedChangeListener { compoundButton, b ->
+                        if (b) {
+                                v.vview.start()
+                        } else {
+                                v.vview.pause()
+                        }
+                }
                 return v
          }
 
@@ -51,10 +48,10 @@ class MyAdapter : BaseAdapter{
          }
 
         override fun getItem(position: Int): Any {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+                return 0
+         }
 
         override fun getItemId(position: Int): Long {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+                return 0
+         }
 }
