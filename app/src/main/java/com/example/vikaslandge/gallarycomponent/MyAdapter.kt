@@ -1,15 +1,22 @@
 package com.example.vikaslandge.gallarycomponent
 
+import android.app.ActionBar
 import android.app.ProgressDialog.show
+import android.media.MediaPlayer
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.MediaController
 import kotlinx.android.synthetic.main.indview.view.*
 import java.io.File
 import java.nio.file.Files
 import android.widget.Toast
+import android.media.MediaMetadataRetriever
+import android.graphics.Bitmap
+
+
 
 class MyAdapter : BaseAdapter{
 
@@ -33,15 +40,13 @@ class MyAdapter : BaseAdapter{
                 v.vview.setVideoURI(Uri.fromFile(files!![position]))
                 v.cb1.text = files!![position].name
 
-                v.cb1.setOnCheckedChangeListener { compoundButton, b ->
-                        if (b) {
-                                v.vview.start()
-                        } else {
-                                v.vview.pause()
-                        }
-                }
+                val mc =MediaController(activity)
+                mc.setMediaPlayer(v.vview)
+                v.vview.setMediaController(mc)
+
                 return v
          }
+
 
         override fun getCount(): Int {
                 return files!!.size
